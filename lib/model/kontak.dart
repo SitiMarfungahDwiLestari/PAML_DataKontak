@@ -1,4 +1,4 @@
-class Kontak{
+class Kontak {
   final String nama;
   final String email;
   final String alamat;
@@ -13,4 +13,19 @@ class Kontak{
     required this.foto,
   });
 
+  Kontak copyWith({
+    String? nama,
+    String? email,
+    String? alamat,
+    String? noTelepon,
+    String? foto,
+  }) {
+    return Kontak(
+      nama: nama ?? this.nama,
+      email: email ?? this.email,
+      alamat: alamat ?? this.alamat,
+      noTelepon: noTelepon ?? this.noTelepon,
+      foto: foto ?? this.foto,
+    );
+  }
 }
