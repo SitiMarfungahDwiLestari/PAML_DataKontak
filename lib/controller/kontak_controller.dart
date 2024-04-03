@@ -43,7 +43,7 @@ class KontakController {
     }
   }
 
-  Future<List<Kontak>> getPeople() async{
+  Future<List<Kontak>> getKontak() async{
     try{
       List<dynamic> peopleData = await kontakService.fetchPeople();
       List<Kontak> people = 
