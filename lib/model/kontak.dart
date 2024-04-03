@@ -39,5 +39,13 @@ class Kontak {
     };
   }
 
-  
+  factory Kontak.fromMap(Map<String, dynamic> map) {
+    return Kontak(
+      nama: map['nama'] as String,
+      email: map['email'] as String,
+      alamat: map['alamat'] as String,
+      noTelepon: map['noTelepon'] as String,
+      foto: map['foto'] as String,
+    );
+  }
 }
