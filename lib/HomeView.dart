@@ -1,4 +1,5 @@
 import 'package:data_kontak/controller/kontak_controller.dart';
+import 'package:data_kontak/main.dart';
 import 'package:data_kontak/model/kontak.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,12 @@ class _HomeViewState extends State<HomeView> {
               },
             ); 
           }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FormKontak()));
         },
       ),
     );
