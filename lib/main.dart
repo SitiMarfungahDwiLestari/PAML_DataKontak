@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:data_kontak/controller/kontak_controller.dart';
+import 'package:data_kontak/model/kontak.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -103,13 +105,27 @@ class _FormKontakState extends State<FormKontak> {
               ),
               ElevatedButton(
                   onPressed: getImage, child: const Text("Ambil Gambar")),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
+                  margin: const EdgeInsets.all(10),
                   child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          // var result = await KontakController().addPerson(
+                          var result = await KontakController().addPerson(
+                            Kontak(
+                              nama: _namaController.text,
+                              email: _emailController.text,
+                              alamat: _alamatController.text,
+                              noTelepon: _noTelpController.text,
+                              foto: _image!.path,
+                            ),
+                            _image,
+                          );
 
-                          // );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(result['message'])));
                         }
                       },
                       child: const Text("Simpan"))),
