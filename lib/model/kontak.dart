@@ -28,4 +28,16 @@ class Kontak {
       foto: foto ?? this.foto,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'nama': nama,
+      'email': email,
+      'alamat': alamat,
+      'noTelepon': noTelepon,
+      'foto': foto,
+    };
+  }
+
+  
 }
