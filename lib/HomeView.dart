@@ -1,3 +1,4 @@
+import 'package:data_kontak/controller/kontak_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -8,6 +9,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final KontakController _controller = KontakController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.getKontak(); 
+  }
+  
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
