@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
@@ -10,23 +11,39 @@ class KontakService {
   }
 
   Future<http.Response> addPerson(Map<String, String> data, File? file) async {
-    // Buat permintaan multipart dengan metode POST
     var request = http.MultipartRequest(
       'POST', 
       getUri(endpoint),
       )
-      ..fields.addAll(data) // Tambahkan bidang data ke permintaan
-      ..headers['Content-Type'] = 'application/json'; // Atur tipe konten sebagai JSON
+      ..fields.addAll(data) 
+      ..headers['Content-Type'] = 'application/json'; 
 
       if (file != null) {
-      // Jika file disediakan, tambahkan ke permintaan sebagai file multipart
       request.files.add(await http.MultipartFile.fromPath('gambar', file.path));
     } else {
-      // Jika file tidak disediakan, tambahkan string kosong sebagai placeholder
       request.files.add(http.MultipartFile.fromString('gambar', ''));
     }
 
-    // Kirim permintaan dan kembalikan responsenya
     return await http.Response.fromStream(await request.send());
+  }
+
+  Future<List<dynamic>> fetchPeople() async{
+    var response = await http.get(
+      getUri(
+        endpoint,
+      ),
+      headers: {
+        "Accept": "application/json",
+      }
+    );
+
+    if (response.statusCode == 200){
+      final Map<String, dynamic> decodeResponse = json.decode(response.body);
+      return decodeResponse[
+        'people'
+      ]; 
+      } else{
+        throw Exception('Failed to load people: ${response.reasonPhrase}');
+    }
   }
 }
